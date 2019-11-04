@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  travel_date: 2019-10-22
+  fare: 1.5
+  aval_seat: 1
+
+two:
+  travel_date: 2019-10-22
+  fare: 1.5
+  aval_seat: 1

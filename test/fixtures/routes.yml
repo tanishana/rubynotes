@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  route_name: MyString
+  serviceno: MyString
+  total_seat: 1
+  origin: 1
+  destination: 1
+  fare: 1
+  start_date: 2019-10-22
+  end_date: 2019-10-22
+
+two:
+  route_name: MyString
+  serviceno: MyString
+  total_seat: 1
+  origin: 1
+  destination: 1
+  fare: 1
+  start_date: 2019-10-22
+  end_date: 2019-10-22

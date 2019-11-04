@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+
+<body align=center>
+	<% if flash[:notice].present?%>
+    <div class="notice"><%= flash[:notice] %></div>
+  <%else%>
+
+	<h1>Run Report Details are Below</h1>
+	<table align="center" class="table table-bordered">
+		<%if @tickets.present? %>
+		<thead>
+			<tr>
+				<th>PnrNo</th>
+				<th>SeatNo</th>
+				<th>BaseFare</th>
+				<th>Gst</th>
+				<th>TotalFare</th>
+				<th>Username</th>
+				<th>Emailid</th>
+				
+			</tr>
+		</thead>
+		<% end -%>
+		<%if @tickets.present? %>
+			<% @tickets.each do |result|%>
+						<tr>
+							<td><%=result.pnr_no%></td>
+							<% seat = []%>
+							<%sum_fare = []%>
+							<% sum_fare = []%>
+							<%#result.each do |r|%>
+							<% seat << result.seat_no%>
+							<% sum_fare << result.total_fare%>
+							<%@total_sum=sum_fare.sum%>
+							<% @fare = result.fare%>
+							<% @gst = result.gst%>
+							<%@user=User.find(id=result.user_id).name%>
+							<%@user_email = User.find(id=result.user_id).emailid %>
+							<% #end -%>
+							<td><%=seat.join(",")%></td>
+							<td><%=@fare%></td>
+							<td><%=@gst%></td>
+							<td><%=@total_sum%></td>
+							<td><%=@user%></td>
+							<td><%=@user_email%></td>
+						</tr> 
+			<% end -%>
+			<%#debugger%>
+  		<%#= will_paginate @tickets,:params => {:from_date =>params[:from_date],:to_date =>params[:to_date]},:remote => true,:link_path =>runreport_path %>
+  		<%= will_paginate @tickets, renderer: BootstrapPagination::Rails, :params => {:from_date =>params[:from_date],:to_date =>params[:to_date]},:remote => true,:link_path =>runreport_path %>
+			<%else%>
+				<div>
+				<h2>No record available for this date <%="#{@from_date.to_date.strftime('%d/%m/%Y')}"%>And<%="#{@to_date.to_date.strftime('%d/%m/%Y')}"%></h2></div>
+		<% end -%>
+		
+	</table>
+
+	<% end -%>
+</body>
+</html>
+<script type="text/javascript">
+	$('.pagination a').attr('data-remote','true');
+</script>

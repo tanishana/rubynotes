@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="js/jquery.min.js"></script>
+
+</head>
+<body>
+
+
+<%= form_tag("/runreport", method: :get,remote: true) do %>
+
+	<h1 style="margin-left: 150px">Bussiness Report</h1>
+	<div class="container" style="margin-top: 30px">
+    <div class="col-md-7">
+        <div class="form-group">
+        	<label>Fromdate:</label>
+            <div class='input-group date' id='datetimepicker6' >
+                <input id="fromdate" type='text' class="form-control" name="fromdate"/>
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div><br>
+    <div class="col-md-7" >
+        <div class="form-group">
+        	<label>Todate:</label>
+            <div class='input-group date' id='datetimepicker7' >
+                <input id="todate" type='text' class="form-control" name="todate"/>
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div> 
+      <div class="col-md-7">	
+	      <label class="radio-inline">
+	      <input type="radio"  name="bydate" id="issuedate" value="issuedate"> Issuedate</label>
+	      <label class="radio-inline">
+	  		<input type="radio" name="bydate" id="traveldate" value="traveldate"> Traveldate<br></label>
+			</div>
+			<div class="col-md-7">
+		<label>BookedBy</label>
+  <select name="bookedby" id="bookby" value="">
+  <option >All</option> 
+  <%=@user.each do|u|%>
+  <option ><%=u.id%></option>
+  <% end -%>
+  </select></div> 
+  <div class="col-md-7">
+  <input type="submit" value="Runreport" class="btn btn-primary">
+	</div>
+
+	</div>
+</div>
+<% end %>
+
+    
+
+
+  <!-- <div class="md-form">
+  
+  	<div ><input id="datetimepicker" type="text" >
+  </div>
+  <br>
+  
+  <input type="date" name="todate" value=""><br> -->
+  
+  
+  
+</body>
+</html>
+
+<div id="report_result">
+	
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker6').datetimepicker( {format:'YYYY-MM-DD', allowInputToggle: true});
+        $('#datetimepicker7').datetimepicker({ format:'YYYY-MM-DD',allowInputToggle: true //Important! See issue #1075
+        });
+        $("#datetimepicker6").on("dp.change", function (e) {
+            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker7").on("dp.change", function (e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+</script>
+<!-- <script type="text/javascript">
+    $(document).ready(function() {
+        $('#datetimepicker').datetimepicker();
+    });
+  </script> -->
+
+
+<!-- <script>
+function myFunction() {
+var from_date = document.getElementById("fromdate").value;
+var end_date =document.getElementById("todate").value
+}
+</script> -->
